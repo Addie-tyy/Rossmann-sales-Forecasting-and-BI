@@ -28,20 +28,15 @@ Typical enterprise challenges addressed in this project:
 | **ETL & Data Pipeline** | **Python (SQLAlchemy, psycopg2-binary, pandas)** | 
 | **Predictive Modeling** | **scikit-learn, numpy** | 
 | **Business Intelligence** | **Power BI Desktop** | 
+| **Environment** | **Python 3.10+, Google Colab** |
 ---
 
-## 4. Executive Power BI Dashboard
+## 4. Power BI Dashboard
 
 <p align="center">
   <img src="assets/dashboard_demo.gif" alt="Rossmann Executive Dashboard Interactive Demo" width="100%" />
 </p>
 
-### Custom Design Language: "Dark Obsidian"
-The report avoids default dashboard templates in favor of a bespoke visual identity built for low eye strain and high visual hierarchy:
-* **Canvas Background**: Deep Obsidian Forest (`#142920`)
-* **KPI Containers**: Bordered cards (`#1C3B2E`) with a `12px` rounded radius
-* **Data Accents**: Emerald Green (`#10B981`) for standard operational volumes; Neon Lime (`#A3E635`) for active promotion benchmarks
-* **Typography**: Crisp White (`#FFFFFF`) for primary callouts; Soft Slate (`#94A3B8`) for secondary labels and axes
 
 ### Executive Architecture & Visual Components
 1. **High-Level KPI Banner**: Instant metrics tracking **Total Revenue (€1.39bn)**, **Total Footfall (148M)**, **Average Basket Spend (€9.42)**, and **Promo Uplift % (37.5%)**.
