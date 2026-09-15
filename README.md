@@ -49,3 +49,45 @@ Typical enterprise challenges addressed in this project:
 ---
 
 ## 5. End-to-End Methodology
+```
+1.0M+ Historical Records (1,115 Stores)
+               │
+               ▼
+┌───────────────────────────────┐
+│ 1. ETL & Cloud Ingestion      │ ──► Parse dates, filter closures (Open=0)
+│    (Python / SQLAlchemy)      │ ──► Impute median CompetitionDistance
+└──────────────┬────────────────┘
+               │
+               ▼
+┌───────────────────────────────┐
+│ 2. Relational Star-Schema     │ ──► PostgreSQL hosted on Neon Cloud
+│    (PostgreSQL)               │ ──► dim_store, dim_date, fct_daily_sales
+└──────────────┬────────────────┘
+               │
+        ┌──────┴──────────┐
+        ▼                 ▼
+┌──────────────┐    ┌───────────────┐
+│ 3A. Feature  │    │ 3B. Semantic  │
+│ Engineering  │    │ DAX Modeling  │
+│ • 7D/14D lag │    │ • Basket Spend│
+│ • Roll means │    │ • Promo Lift  │
+│ • Hol. flags │    │ • Day sort    │ 
+└──────┬───────┘    └──────┬────────┘
+       │                   │
+       ▼                   ▼
+┌──────────────┐    ┌──────────────┐
+│ 4A. Random   │    │ 4B. Power BI │
+│ Forest Model │    │ Dashboard    │
+│              │    │ • Year pills │
+│ • RMSPE eval │    │ • 4-quadrant │
+│              │    │ • Cross-filter
+└──────┬───────┘    └──────┬───────┘
+       │                   │
+       └───────┬───────────┘
+               │
+               ▼
+┌───────────────────────────────┐
+│ 5. Operational Strategy       │ ──► Capitalize on Monday surge (€0.45bn)
+│    & Revenue Optimization     │ ──► Prioritize Store Type 'a' (53% share)
+└───────────────────────────────┘
+```
