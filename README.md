@@ -34,7 +34,7 @@ Typical enterprise challenges addressed in this project:
 ## 4. Power BI Dashboard
 
 <p align="center">
-  <img src="assets/dashboard_demo.gif" alt="Rossmann Executive Dashboard Interactive Demo" width="100%" />
+  <img src="assets/Dashboard.gif" alt="Rossmann Executive Dashboard Interactive Demo" width="100%" />
 </p>
 
 
