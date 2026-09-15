@@ -1,15 +1,7 @@
 # Rossmann Retail Intelligence: Sales Forecasting & BI Pipeline
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon_Serverless-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.tech/)
-[![Power BI](https://img.shields.io/badge/Power_BI-Executive_Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Random_Forest-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![UI Theme](https://img.shields.io/badge/UI_Design-Dark_Obsidian-10B981?style=for-the-badge)](https://github.com/)
-
-> **An end-to-end retail intelligence pipeline integrating machine learning sales forecasting with an executive-grade Power BI dashboard to evaluate multi-year revenue drivers, promo elasticity, and footfall patterns across 1,115 Rossmann store locations.**
+Using 1M+ daily records from 1,115 Rossmann stores, this project ingested transactional data into a serverless PostgreSQL database, built Python machine learning models to forecast sales, and engineered an executive Power BI dashboard to quantify promotional uplift (+37.5%), footfall dynamics, and assortment profitability for data-driven decisions.
 
 ---
-
 ## 1. Why This Project?
 
 Retail store networks operate on narrow margins where mismatched inventory, inaccurate staffing schedules, and misdirected promotional budgets translate into millions of euros in lost revenue. 
@@ -23,26 +15,19 @@ Typical enterprise challenges addressed in this project:
 
 ## 2. Dataset Overview
 
-* **Source**: Rossmann Store Sales Historical Dataset (spanning January 1, 2013 to July 31, 2015).
-* **Scope**: Over 1,000,000 daily sales records across 1,115 pharmacy/drugstore locations across Germany.
-* **Core Tables & Schema Design**:
-  * `fct_daily_sales`: Daily store transactional records containing `Sales`, `Customers` (footfall), `Open` flags, `Promo` status, and `StateHoliday` indicators.
-  * `dim_store`: Store metadata including `StoreType` (`a`, `b`, `c`, `d`), `Assortment` tier (`Basic`, `Extra`, `Extended`), `CompetitionDistance`, and promotion cycle markers (`Promo2`).
-  * `dim_date`: Extracted calendar lookup table indexing `DayOfWeek`, `Month`, `Quarter`, and `Year`.
+[Rossmann](https://www.kaggle.com/datasets/ealaxi/paysim1) — one of Europe’s largest drugstore chains store Sales, sourced from Kaggle. Historical Dataset (spanning January 1, 2013 to July 31, 2015) contains 1M+ daily sales records across 1,115 Rossmann stores locations across Germany.
 
 ---
 
 ## 3. Core Tech Stack
 
-| Layer | Technology | Function |
-| :--- | :--- | :--- |
-| **Cloud Database** | **Neon Serverless PostgreSQL** | Cloud-native relational storage hosting star-schema tables. |
-| **DB Management** | **pgAdmin 4** | Schema enforcement, table indexing, and relational integrity. |
-| **ETL & Data Pipeline** | **Python (SQLAlchemy, psycopg2-binary, pandas)** | Ingestion, data cleaning, datetime extraction, and automated loading. |
-| **Predictive Modeling** | **scikit-learn, numpy** | Feature engineering, time-lag creation, and Random Forest regression. |
-| **Business Intelligence** | **Power BI Desktop (Dark Obsidian Theme)** | DAX modeling, custom UX design, dynamic slicing, and interactive analysis. |
-| **Version Control** | **Git & GitHub** | Source code management, documentation, and asset distribution. |
-
+| Layer | Technology |
+| :--- | :--- |
+| **Cloud Database** | **Neon Serverless PostgreSQL** |
+| **DB Management** | **pgAdmin 4** | 
+| **ETL & Data Pipeline** | **Python (SQLAlchemy, psycopg2-binary, pandas)** | 
+| **Predictive Modeling** | **scikit-learn, numpy** | 
+| **Business Intelligence** | **Power BI Desktop** | 
 ---
 
 ## 4. Executive Power BI Dashboard
