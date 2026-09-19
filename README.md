@@ -123,3 +123,18 @@ Typical enterprise challenges addressed in this project:
 **1.** Training on log(1+Sales) rather than raw sales effectively stabilized variance across divergent store volumes, enabling standard mean-squared-error objective functions to optimize percentage-based retail metrics directly.
 
 **2.** The pipeline successfully mapped inference to all 41,088 test records in test.csv, explicitly enforcing structural zero sales on closed store days (Open == 0)
+
+## Challenges & Debugging
+
+**1.** `Structural Missingness vs. Random Nulls:` Missing values in promotional interval fields (`Promo2SinceWeek`, `PromoInterval`) were strictly structural—only occurring when a store opted out of long-term promotions (Promo2 == 0). Imputing them with arbitrary means or medians would have introduced false promotional signals into the model.
+
+**2.** `Negative Competition Age Anomalies:` Raw date differences yielded negative competition ages for 191 stores where competitors opened after the sales observation window. This was corrected by clipping negative spans to zero and decoupling the metric into an active indicator (`competition_active`) alongside continuous age.
+
+**3.** `Data Leakage & Lookahead Bias:` Real-time customer traffic (Customers) was excluded from training to prevent test-time data leakage, and random K-fold splits were rejected in favor of chronological holdouts to prevent lookahead bias.
+
+## Honest Limitations
+
+**1.** `Exclusion of Real-Time Footfall:` Removing Customers ensured realistic inference conditions, but eliminated the single most predictive real-time sales indicator, capping peak-demand accuracy.
+
+**2.** `Tree-Based Extrapolation Limits:` Random Forests split on orthogonal decision thresholds rather than linear slopes. As a result, the model cannot extrapolate above historical maximums during unprecedented store-level demand spikes.
+
