@@ -91,3 +91,30 @@ Typical enterprise challenges addressed in this project:
 │    & Revenue Optimization     │ ──► Prioritize Store Type 'a' (53% share)
 └───────────────────────────────┘
 ```
+## 6. Methods & Analytical Techniques
+
+### Exploratory Data Analysis & Statistical Profiling (Python)
+* **Distribution Skewness & Log Transformation**: Identified strong right-skewness in raw store daily sales distributions; evaluated target normalization strategies to stabilize variance across high-volume vs. low-volume store clusters.
+* **Store Closure & Zero-Sales Segmentation**: Segmented trading versus non-trading periods (`Open == 0` vs. `Open == 1`); isolated mandatory Sunday statutory closures to eliminate zero-inflated distortion without losing structural calendar signals.
+* **Competitor Proximity Analysis**: Evaluated the non-linear relationship between `CompetitionDistance` and revenue density; discovered that stores with nearby competitors (<1,000m) often exhibited higher baseline revenue due to prime, high-density urban footfall locations.
+* **Holiday Impact & Demand Spikes**: Analyzed calendar anomalies across `StateHoliday` types (National, Easter, Christmas) and `SchoolHoliday` windows, quantifying pre-holiday pantry-loading versus post-holiday demand lulls.
+* **Multi-Collinearity & Correlation Screening**: Screened store metadata features using correlation heatmaps and Variance Inflation Factor (VIF) checks to remove redundant promotional interval markers.
+
+### Feature Engineering & Data Preparation
+* **Target Leakage Prevention (Customer Footfall)**: Intentionally excluded the `Customers` column from sales forecasting features, as real-time customer counts are unavailable at the time of future inference, preventing unrealistic predictive leakage.
+* **Autoregressive Lags & Rolling Statistics**: Engineered historical sales lags ($t-7$, $t-14$, $t-21$, $t-28$) to capture cyclical day-of-week seasonality, alongside 7-day, 14-day, and 30-day rolling averages and rolling standard deviations to capture localized demand momentum and volatility.
+* **Categorical Encoding & Pipeline Transformations**: Implemented target-safe encoding for high-cardinality categorical variables (`StoreType`, `Assortment`, `StateHoliday`) and imputed missing `CompetitionDistance` values using grouped medians conditioned on `StoreType`.
+* **Promotional Duration & Temporal Flags**: Deconstructed promotional cycles into continuous time features—calculating months since competitor opening and weeks active in rolling `Promo2` campaigns.
+
+### Predictive Modeling & Performance Validation
+* **Temporal Cross-Validation Strategy**: Avoided randomized train-test splits (which induce look-ahead bias in time series); implemented strict out-of-time chronological validation (training on historical data and validating on the final forward weeks).
+* **Ensemble Learning Architecture**: Trained an ensemble **Random Forest Regressor** to model high-dimensional non-linear interactions between promotion status, store density, seasonality, and rolling historical sales.
+* **Dual Evaluation Metrics (RMSPE & RMSE)**:
+  * **Root Mean Squared Error (RMSE)**: Monitored to penalize large absolute currency deviations on peak volume trading days.
+  * **Root Mean Squared Percentage Error (RMSPE)**: Optimized as the primary retail evaluation benchmark to treat percentage forecast error symmetrically across small rural outlets and high-turnover flagship locations:
+    $$\text{RMSPE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(\frac{y_i - \hat{y}_i}{y_i}\right)^2}$$
+
+### Semantic Modeling & DAX Formulation (Power BI)
+* **Average Basket Spend**:
+  ```dax
+  Avg Basket Spend = DIVIDE([Total Revenue], SUM(fct_daily_sales[Customers]), 0)
