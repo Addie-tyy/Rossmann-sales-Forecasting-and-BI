@@ -38,13 +38,13 @@ Typical enterprise challenges addressed in this project:
 </p>
 
 
-### Executive Architecture & Visual Components
-1. **High-Level KPI Banner**: Instant metrics tracking **Total Revenue (€1.39bn)**, **Total Footfall (148M)**, **Average Basket Spend (€9.42)**, and **Promo Uplift % (37.5%)**.
-2. **Interactive Year Slicer**: Custom pill buttons (`2013`, `2014`, `2015`) allowing instant global state recalculation.
-3. **Weekly Revenue Rhythm**: Horizontal bar breakdown displaying consumer demand patterns chronologically from Monday through Sunday.
+### Executive Architecture
+1. **KPI Banner**: Instant metrics tracking **Total Revenue (€1.39bn)**, **Total Footfall (148M)**, **Average Basket Spend (€9.42)**, and **Promo Uplift % (37.5%)**.
+2. **Year Slicer**: Buttons (`2013`, `2014`, `2015`) allowing instant global state recalculation.
+3. **Weekly Revenue Rhythm**: Displaying consumer demand patterns chronologically from Monday through Sunday.
 4. **Assortment & Promo Uplift Matrix**: Direct comparative table evaluating customer basket spend and overall revenue across product assortments (`Basic`, `Extra`, `Extended`) during `Promo` vs. `Regular` days.
-5. **Monthly Revenue vs. Promo Lift %**: Dual-axis combination chart mapping gross monthly revenue alongside campaign efficiency trends.
-6. **Store Type Contribution**: Donut distribution isolating revenue splits across store formats (`a`, `b`, `c`, `d`).
+5. **Monthly Revenue vs. Promo Lift %**: Dual-axis combination chart mapping gross monthly revenue parallely with campaign efficiency trends.
+6. **Store Type Contribution**: Donut chart showing revenue splits across store formats (`a`, `b`, `c`, `d`).
 
 ---
 
