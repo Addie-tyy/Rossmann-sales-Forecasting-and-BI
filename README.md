@@ -15,7 +15,7 @@ Typical enterprise challenges addressed in this project:
 
 ## 2. Dataset Overview
 
-[Rossmann](https://www.kaggle.com/datasets/ealaxi/paysim1) — one of Europe’s largest drugstore chains store Sales, sourced from Kaggle. Historical Dataset (spanning January 1, 2013 to July 31, 2015) contains 1M+ daily sales records across 1,115 Rossmann stores locations across Germany.
+[Rossmann](https://www.kaggle.com/competitions/rossmann-store-sales/data) — one of Europe’s largest drugstore chains store Sales, sourced from Kaggle. Historical Dataset (spanning January 1, 2013 to July 31, 2015) contains 1M+ daily sales records across 1,115 Rossmann stores locations across Germany.
 
 ---
 
