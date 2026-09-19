@@ -111,10 +111,15 @@ Typical enterprise challenges addressed in this project:
 **4. Zero-Leakage Generalization:** Real-time footfall (Customers) was excluded from the feature matrix because future customer counts are unknown prior to store opening. The 16.49% error represents genuine out-of-sample predictive power without target leakage.
 
 **5. Feature Importance:** The tree-split analysis confirms that three core factors drive roughly 70% of all sales variance:
+
 **a.** `competition_distance` (28.28% Importance): Stores located in denser commercial centers with closer competitors maintain fundamentally distinct baseline turnover dynamics compared to isolated rural stores.
+
 **b.** `store Identifier` (22.14% Importance): The individual store ID accounts for over a fifth of the model's predictive weight, capturing persistent store-level baseline volume, location idiosyncrasies, and established customer habits.
+
 **c.** `promo Active Flag` (19.39% Importance): Promotional status is the third largest split driver, confirming that active discount/marketing campaigns create immediate, structural demand shifts that override general calendar baselines.
 
 ## Pipeline & Operational Takeaways
+
 **1.** Training on log(1+Sales) rather than raw sales effectively stabilized variance across divergent store volumes, enabling standard mean-squared-error objective functions to optimize percentage-based retail metrics directly.
+
 **2.** The pipeline successfully mapped inference to all 41,088 test records in test.csv, explicitly enforcing structural zero sales on closed store days (Open == 0)
