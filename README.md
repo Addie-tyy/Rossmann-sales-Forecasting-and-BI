@@ -100,3 +100,21 @@ Typical enterprise challenges addressed in this project:
 **5. Model Training:** Trained a Random Forest Regressor in Python on open store days (`Open == 1` and `Sales > 0`), capturing non-linear relationships across promotional cycles, calendar features, and store formats.
 
 **6. Model Evaluation & Outcomes:** Validated using RMSPE (Root Mean Squared Percentage Error) and RMSE over a strict out-of-time chronological split, delivering stable forward-week sales predictions across both rural branches and top-tier Type `a` flagships.
+
+## Key Findings
+**1. Model Performance & Validation:** Tested on an out-of-time chronological holdout of `41,396` records across the final 6 weeks (June 19 – July 31, 2015), the Random Forest regressor achieved a RMSPE of `16.49%`.
+
+**2. Day-to-Day Accuracy:** The model's Median Absolute Percentage Error is `9.06%`. Typical daily branch predictions stay within ~9% of actual turnover, while the higher RMSPE is driven by squaring errors on occasional volatile outlier days.
+
+**3.** High-turnover flagship locations are predicted with tight relative accuracy. For example, on `Store 1114` with `€21,834` in actual daily turnover, the model predicted `€22,144.34` (an absolute error of only `+€310.34`, or `1.42%`).
+
+**4. Zero-Leakage Generalization:** Real-time footfall (Customers) was excluded from the feature matrix because future customer counts are unknown prior to store opening. The 16.49% error represents genuine out-of-sample predictive power without target leakage.
+
+**5. Feature Importance:** The tree-split analysis confirms that three core factors drive roughly 70% of all sales variance:
+**a.** `competition_distance` (28.28% Importance): Stores located in denser commercial centers with closer competitors maintain fundamentally distinct baseline turnover dynamics compared to isolated rural stores.
+**b.** `store Identifier` (22.14% Importance): The individual store ID accounts for over a fifth of the model's predictive weight, capturing persistent store-level baseline volume, location idiosyncrasies, and established customer habits.
+**c.** `promo Active Flag` (19.39% Importance): Promotional status is the third largest split driver, confirming that active discount/marketing campaigns create immediate, structural demand shifts that override general calendar baselines.
+
+## Pipeline & Operational Takeaways
+**1.** Training on log(1+Sales) rather than raw sales effectively stabilized variance across divergent store volumes, enabling standard mean-squared-error objective functions to optimize percentage-based retail metrics directly.
+**2.** The pipeline successfully mapped inference to all 41,088 test records in test.csv, explicitly enforcing structural zero sales on closed store days (Open == 0)
